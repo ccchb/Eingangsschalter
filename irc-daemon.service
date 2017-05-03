@@ -1,0 +1,11 @@
+[Unit]
+Description=irc-daemon für türschalter
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ircbot.py
+
+[Install]
+WantedBy=multi-user.target
+
