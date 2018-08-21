@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <style>
+body {
+	background-color: black;
+	color: white;
+}
+nav {
+	border-bottom: 2px solid green;
+	display: flex;
+	align-items:center;
+	flex-direction: row;
+}
+body.closed nav{
+	border-color: red;
+}
+#name {
+	font-size: 3em;
+	padding: auto;
+}
+#logo {
+	height: 4em;
+	margin-right: 10px;
+}
+#refresh {
+	margin-left: auto;
+	border: 5px solid green;
+	border-radius: 5px;
+	background: black;
+	color: white;
+	font-size: 2em;
+}
+body.closed #refresh {
+	border-color: red;
+}
+div#content {
+	display: flex;
+	justify-content: center;
+}
+#state {
+	margin: auto;
+	width: 40%;
+}
+		</style>
+	<title>CCCHB is open</title></head>
+	<body class="offline">
+		<nav>
+			<img id="logo" src="">
+			<span id="name"></span>
+			<button id="refresh" type="button" onclick="load()">Update</button>
+		</nav>
+		<div id="content">
+			<img id="state" src="">
+		</div>
+
+		<script>
+function load() {
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "spaceapi.json", false);
+	xhttp.send();
+	var result = JSON.parse(xhttp.responseText);
+
+	document.title = result.space + " is " + (result.state.open ? 'open' : 'close');
+	document.getElementById("name").innerText = result.space;
+	document.getElementById("logo").src = result.logo;
+
+	var stateurl = result.state.open ? result.state.icon.open : result.state.icon.closed;
+	document.getElementById("state").src = stateurl;
+
+	var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+	link.type = 'image/x-icon';
+	link.rel = 'shortcut icon';
+	link.href = stateurl;
+	document.getElementsByTagName('head')[0].appendChild(link);
+
+	var body = document.querySelector("body");
+	if (!result.state.open) {
+		body.classList.add("closed");
+	} else{
+		body.classList.remove("closed");
+	}
+}
+
+load();
+window.setInterval(load, 60 * 1000);
+		</script>
+  </body>
+</html>
