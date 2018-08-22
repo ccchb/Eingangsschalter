@@ -4,7 +4,7 @@ import sopel.module
 
 SPACEAPI = "/var/www/html/spaceapi.json"
 CHANNEL = "#ccchb"
-PLACE = "P5"
+PLACE = "ccchb"
 
 cache = {
     "open": False
