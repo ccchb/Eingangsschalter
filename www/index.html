@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <style>
+	<head>
+		<style>
 body {
 	background-color: black;
 	color: white;
@@ -42,15 +43,15 @@ div#content {
 	width: 40%;
 }
 		</style>
-	<title>CCCHB is open</title></head>
-	<body class="offline">
+	</head>
+	<body>
 		<nav>
-			<img id="logo" src="">
+			<img id="logo" src=""/>
 			<span id="name"></span>
 			<button id="refresh" type="button" onclick="load()">Update</button>
 		</nav>
 		<div id="content">
-			<img id="state" src="">
+			<img id="state" src=""/>
 		</div>
 
 		<script>
@@ -66,7 +67,7 @@ function load() {
 
 	var stateurl = result.state.open ? result.state.icon.open : result.state.icon.closed;
 	document.getElementById("state").src = stateurl;
-
+	
 	var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
 	link.type = 'image/x-icon';
 	link.rel = 'shortcut icon';
@@ -76,7 +77,8 @@ function load() {
 	var body = document.querySelector("body");
 	if (!result.state.open) {
 		body.classList.add("closed");
-	} else{
+	}
+	else{
 		body.classList.remove("closed");
 	}
 }
@@ -84,5 +86,7 @@ function load() {
 load();
 window.setInterval(load, 60 * 1000);
 		</script>
-  </body>
+
+	</body>
 </html>
+

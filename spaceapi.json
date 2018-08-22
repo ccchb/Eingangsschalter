@@ -9,12 +9,12 @@
   "logo": "https://ccchb.de/logo/CCCHB-logo_256x256_bw.png",
   "space": "CCCHB",
   "state": {
+    "lastchange": 1518643002.5509002,
+    "open": false,
     "icon": {
-      "closed": "https://ccchb.de/w/images/9/9e/SpaceClosed.svg",
-      "open": "https://ccchb.de/w/images/9/95/SpaceOpen.svg"
-    },
-    "lastchange": 1534869423.371439,
-    "open": false
+      "open": "https://files.ccchb.de/assets/SpaceOpen.svg",
+      "closed": "https://files.ccchb.de/assets/SpaceClosed.svg"
+    }
   },
   "url": "https://ccchb.de/"
 }
