@@ -1,11 +1,12 @@
 [Unit]
 Description=Schalter IRC Bot
 
-[Service] 
+[Service]
 ExecStart=/usr/bin/sopel
 User=pi
+Group=pi
 Restart=always
-RestartSec=3
+RestartSec=300
 
 [Install]
 WantedBy=multi-user.target

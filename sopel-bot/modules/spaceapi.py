@@ -3,7 +3,6 @@ import json
 import sopel.module
 
 SPACEAPI = "/var/www/html/spaceapi.json"
-CHANNEL = "#ccchb"
 PLACE = "ccchb"
 
 cache = {
@@ -19,20 +18,26 @@ def status_msg(status):
     status_text = "closed"
     if status:
         status_text = "open"
-    return PLACE + ' is ' + status_text
+    return '{} is {}'.format(PLACE, status_text)
 
 def change_status(bot, status):
     status_text = "closed"
     if status:
         status_text = "open"
-    bot.say(PLACE +' changed to '+ status_text, CHANNEL)
+    for ch in bot.channels:
+        bot.notice('{} changed to {}'.format(PLACE, status_text), ch)
 
     topic = status_msg(status)
 
-    channel = bot.channels[CHANNEL]
-    if channel.topic != None:
-        topic = channel.topic.replace(status_msg(not status), topic)
-    bot.write(('TOPIC', CHANNEL + ' :' + topic))
+    for ch in bot.channels:
+        channel = bot.channels[ch]
+        topic_new = topic
+        topic_cur = status_msg(not status)
+        if channel.topic != None:
+            topic_new = channel.topic.replace(topic_cur, topic_new)
+            topic_cur = channel.topic
+        if topic_new != topic_cur:
+            bot.write(('TOPIC', ch), topic_new)
 
 def check_status(bot, human=False):
     data = get_spaceapi()
@@ -40,8 +45,7 @@ def check_status(bot, human=False):
 
     if status != cache["open"]:
         cache["open"] = status
-        if CHANNEL in bot.channels:
-            change_status(bot, status)
+        change_status(bot, status)
 
     if human:
         bot.reply(status_msg(status))

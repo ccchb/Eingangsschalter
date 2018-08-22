@@ -5,9 +5,9 @@ Description=Eingangsschalter
 ExecStart=/home/pi/Eingangsschalter/schalter.py
 WorkingDirectory=/home/pi/Eingangsschalter
 User=pi
+Group=pi
 Restart=always
-RestartSec=3
+RestartSec=30
 
 [Install]
 WantedBy=multi-user.target
-
