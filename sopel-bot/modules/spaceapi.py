@@ -27,18 +27,6 @@ def change_status(bot, status):
     for ch in bot.channels:
         bot.notice('{} changed to {}'.format(PLACE, status_text), ch)
 
-    topic = status_msg(status)
-
-    for ch in bot.channels:
-        channel = bot.channels[ch]
-        topic_new = topic
-        topic_cur = status_msg(not status)
-        if channel.topic != None:
-            topic_new = channel.topic.replace(topic_cur, topic_new)
-            topic_cur = channel.topic
-        if topic_new != topic_cur:
-            bot.write(('TOPIC', ch), topic_new)
-
 def check_status(bot, human=False):
     data = get_spaceapi()
     status = data["state"]["open"]
@@ -47,8 +35,19 @@ def check_status(bot, human=False):
         cache["open"] = status
         change_status(bot, status)
 
+    status_text = status_msg(status)
+    for ch in bot.channels:
+        channel = bot.channels[ch]
+        topic_new = status_text
+        topic_cur = status_msg(not status)
+        if channel.topic != None:
+            topic_new = channel.topic.replace(topic_cur, topic_new)
+            topic_cur = channel.topic
+        if topic_new != topic_cur:
+            bot.write(('TOPIC', ch), topic_new)
+
     if human:
-        bot.reply(status_msg(status))
+        bot.reply(status_text)
 
 @sopel.module.interval(5)
 def interval_check_status(bot):
