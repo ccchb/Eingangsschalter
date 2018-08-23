@@ -53,6 +53,6 @@ def check_status(bot, human=False):
 def interval_check_status(bot):
     check_status(bot)
 
-@sopel.module.commands('status')
+@sopel.module.commands('status','help')
 def cmd_check_status(bot, trigger):
     check_status(bot, True)
