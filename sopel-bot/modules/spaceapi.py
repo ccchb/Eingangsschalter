@@ -9,17 +9,20 @@ cache = {
     "open": False
 }
 
+# opens the spaceapi json file, loads it and interpretes the json
 def get_spaceapi():
         with open(SPACEAPI, 'r') as infile:
                 data = json.load(infile)
         return data
 
+# generates a status message provides the current status
 def status_msg(status):
     status_text = "closed"
     if status:
         status_text = "open"
     return '{} is {}'.format(PLACE, status_text)
 
+# writes a message to the irc channel if the status has changed  
 def change_status(bot, status):
     status_text = "closed"
     if status:
@@ -27,6 +30,8 @@ def change_status(bot, status):
     for ch in bot.channels:
         bot.notice('{} changed to {}'.format(PLACE, status_text), ch)
 
+# reads the spaceapi file and checks if the status is up to date. Updates otherwise, 
+# this function is called every 5 seconds
 def check_status(bot, human=False):
     data = get_spaceapi()
     status = data["state"]["open"]
