@@ -8,7 +8,6 @@
 
 # to make sure that everything does not happen at once
 import time
-import datetime
 # json and raspi imports
 import json
 # for using GPIO pins of the raspi
@@ -33,7 +32,7 @@ def switched(pos):
     wert_des_schalters = not bool(GPIO.input(pin_number))
     if pos != wert_des_schalters:
       journal.write("state changed to: %s " %wert_des_schalters)
-      chn_time = datetime.datetime.now().isoformat()
+      chn_time = time.time()
       icons = data.get("state").get('icon')
       data.update({'state':{'open':wert_des_schalters,'lastchange':chn_time, "icon":icons}})
       currentState = wert_des_schalters
