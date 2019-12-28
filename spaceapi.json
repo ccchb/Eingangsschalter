@@ -1,13 +1,14 @@
 {
   "api": "0.13",
+  "space": "CCCHB",
+  "logo": "https://ccchb.de/logo/CCCHB-logo_256x256_bw.png",
+  "url": "https://ccchb.de/",
   "location": {
     "address": "Postamt 5, An der Weide 50a, 28195 Bremen, Germany",
     "ext_floor": 1,
     "lat": 53.0815,
     "lon": 8.8154
   },
-  "logo": "https://ccchb.de/logo/CCCHB-logo_256x256_bw.png",
-  "space": "CCCHB",
   "state": {
     "lastchange": 1518643002.5509002,
     "open": false,
@@ -16,5 +17,5 @@
       "closed": "https://files.ccchb.de/assets/SpaceClosed.svg"
     }
   },
-  "url": "https://ccchb.de/"
+  "ext_ccc": "erfa"
 }
