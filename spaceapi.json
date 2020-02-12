@@ -9,6 +9,15 @@
     "lat": 53.0815,
     "lon": 8.8154
   },
+  "contact": {
+    "irc": "irc://irc.hackint.net/ccchb",
+    "ml": "ccc@lists.ccchb.de",
+    "issue_mail": "geno+ccc@fireorbit.de"
+  },
+  "issue_report_channels": [
+    "issue_mail",
+    "ml"
+  ],
   "state": {
     "lastchange": 1518643002.5509002,
     "open": false,
